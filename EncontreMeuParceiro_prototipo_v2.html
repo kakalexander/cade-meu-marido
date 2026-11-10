@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EncontreMeuParceiro · Protótipo v2</title>
+  <style>
+    :root{
+      --bg:#fff8f8;
+      --card:#ffffff;
+      --primary:#ef8f95;
+      --primary-strong:#e77982;
+      --primary-soft:#fde7e9;
+      --text:#442e31;
+      --muted:#8e7175;
+      --line:#f1d6d9;
+      --ok:#eaf8ef;
+      --ok-text:#3b7650;
+      --danger:#fff0f1;
+      --danger-text:#bb4f5d;
+      --shadow:0 18px 50px rgba(202,120,128,.18);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#fffdfd 0%, #fff3f4 100%);
+      font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+      color:var(--text);
+    }
+    .shell{
+      max-width:1120px;
+      margin:28px auto;
+      padding:24px;
+      display:grid;
+      grid-template-columns:1fr 390px;
+      gap:40px;
+      align-items:start;
+    }
+    .copy{padding:42px 0}
+    .eyebrow{font-size:12px;letter-spacing:1.8px;font-weight:800;color:var(--primary-strong)}
+    h1{font-size:clamp(36px,5vw,62px);line-height:1.02;margin:12px 0 18px;letter-spacing:-2px}
+    h1 span{color:var(--primary-strong)}
+    .copy p{max-width:560px;color:#6c5458;font-size:17px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .chips span{background:#fff;border:1px solid var(--line);padding:9px 14px;border-radius:999px;color:#7d5d62;font-size:12px;box-shadow:0 6px 20px rgba(0,0,0,.04)}
+    .note{margin-top:24px;background:rgba(255,255,255,.75);backdrop-filter: blur(5px);border:1px solid var(--line);border-radius:20px;padding:18px 20px;max-width:580px}
+    .note h3{margin:0 0 8px;font-size:16px}
+    .note p{font-size:14px;margin:0;color:#6b5659}
+
+    .phone{background:#fff;border-radius:34px;padding:10px;border:1px solid #f1d7db;box-shadow:var(--shadow)}
+    .screen{height:790px;border-radius:26px;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;position:relative}
+    .scroll{flex:1;overflow:auto;padding:18px 16px 110px;scrollbar-width:thin}
+    .status{display:flex;justify-content:space-between;font-size:11px;color:#9d7b80;margin-bottom:16px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:38px;height:38px;border-radius:14px;background:var(--primary-soft);display:grid;place-items:center;font-size:21px;color:var(--primary-strong)}
+    .brand strong{display:block;font-size:16px}
+    .brand small{color:var(--muted);font-size:11px}
+    .badge{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:11px;color:var(--primary-strong);font-weight:700}
+    .banner{
+      background:linear-gradient(135deg,#fcebed,#ffffff);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      margin-bottom:14px;
+    }
+    .banner h2{margin:0 0 6px;font-size:20px;line-height:1.1}
+    .banner p{margin:0;color:#7c6468;font-size:12px}
+
+    .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0;box-shadow:0 10px 30px rgba(213,145,152,.08)}
+    .card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-weight:800;font-size:14px}
+    .pill{background:var(--primary-soft);color:var(--primary-strong);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:800}
+    .avatar{width:96px;height:96px;border-radius:24px;background:linear-gradient(180deg,#fff,#fce8ea);border:2px dashed #efbcc3;display:grid;place-items:center;font-size:38px;margin:0 auto 12px;color:var(--primary-strong);overflow:hidden}
+    .name{text-align:center;font-weight:800;font-size:16px}
+    .mini{text-align:center;color:var(--muted);font-size:11px;margin:4px 0 14px}
+    .btn{border:0;border-radius:14px;padding:12px 14px;font-size:12px;font-weight:800;cursor:pointer}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-secondary{background:#fff;border:1px solid var(--line);color:#7c5b61}
+    .btn-full{width:100%}
+    .sr{position:absolute;left:-9999px}
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .stat{background:#fff8f9;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+    .stat strong{display:block;font-size:18px;color:var(--text);font-variant-numeric:tabular-nums}
+    .stat small{font-size:10px;color:var(--muted)}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .distance{font-size:38px;font-weight:900;letter-spacing:-2px;color:var(--primary-strong)}
+    .distance small{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+    .signal{margin-top:10px;padding:13px;border-radius:15px;background:var(--ok);color:var(--ok-text);font-size:12px;font-weight:700}
+    .signal.danger{background:var(--danger);color:var(--danger-text)}
+    .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .fields label{font-size:10px;color:var(--muted)}
+    input[type=number]{width:100%;margin-top:4px;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--text);font:12px system-ui}
+    .helper{font-size:11px;color:#8c6e72;margin-top:8px}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .caption{font-size:11px;color:var(--muted);margin:0 0 12px}
+    .axis strong{font-size:20px;color:var(--primary-strong)}
+
+    .notif-preview{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px}
+    .notif-icon{width:36px;height:36px;border-radius:12px;background:var(--primary-soft);display:grid;place-items:center;color:var(--primary-strong);font-size:18px;flex:none}
+    .notif-preview strong{display:block;font-size:12px}
+    .notif-preview p{margin:2px 0 0;font-size:11px;color:var(--muted)}
+
+    .tab-screen{display:none}
+    .tab-screen.active{display:block}
+
+    .bottom-nav{
+      position:absolute;left:12px;right:12px;bottom:12px;
+      background:#fff;border:1px solid var(--line);border-radius:22px;padding:10px;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:6px;box-shadow:0 10px 28px rgba(215,146,152,.18)
+    }
+    .nav-item{
+      border:0;background:transparent;border-radius:16px;padding:10px 4px;cursor:pointer;
+      display:flex;flex-direction:column;align-items:center;gap:4px;color:#8b6d71;font-size:10px;font-weight:700
+    }
+    .nav-item.active{background:var(--primary-soft);color:var(--primary-strong)}
+    .nav-item span:first-child{font-size:18px;line-height:1}
+
+    .toast{
+      position:absolute;left:18px;right:18px;top:74px;z-index:5;
+      background:#fff;border:1px solid var(--line);box-shadow:0 12px 30px rgba(195,113,121,.15);
+      border-radius:18px;padding:12px 14px;display:none
+    }
+    .toast.show{display:block}
+    .toast .notif-preview{border:0;padding:0;background:transparent}
+    .footer{padding-top:10px;text-align:center;font-size:10px;color:#a18287}
+
+    @media (max-width:830px){
+      .shell{grid-template-columns:1fr;max-width:460px;gap:14px;margin:0 auto;padding:12px}
+      .copy{padding:8px 2px 0}
+      .copy p{font-size:14px}
+      .note{display:none}
+      .screen{height:76vh;min-height:680px}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="copy">
+      <div class="eyebrow">PROTÓTIPO INTERATIVO · MVP FLUTTER</div>
+      <h1>Encontre<span>MeuParceiro</span></h1>
+      <p>Um aplicativo simples para mostrar a foto do parceiro, obter localização, simular distância, disparar notificação local e exibir os eixos X, Y e Z do acelerômetro.</p>
+      <div class="chips">
+        <span>📷 Câmera</span>
+        <span>📍 GPS</span>
+        <span>🔔 Notificação local</span>
+        <span>📐 Acelerômetro</span>
+        <span>📱 Menu inferior</span>
+      </div>
+      <div class="note">
+        <h3>Melhorias aplicadas no protótipo</h3>
+        <p>Adicionei um menu na parte inferior para melhorar a navegação, mudei a paleta para branco com vermelho claro em tom pastel e criei uma aba/tela de alerta mostrando a notificação quando o parceiro estiver longe.</p>
+      </div>
+    </div>
+
+    <div class="phone">
+      <main class="screen">
+        <div id="toast" class="toast" role="alert">
+          <div class="notif-preview">
+            <div class="notif-icon">🔔</div>
+            <div>
+              <strong>EncontreMeuParceiro</strong>
+              <p>Seu parceiro está a mais de 100 metros de você.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll">
+          <div class="status"><span>20:35</span><span>●●● ▰</span></div>
+          <div class="topbar">
+            <div class="brand">
+              <div class="logo">⌖</div>
+              <div>
+                <strong>EncontreMeuParceiro</strong>
+                <small>Seu parceiro por perto</small>
+              </div>
+            </div>
+            <div class="badge">MVP</div>
+          </div>
+
+          <section id="tab-home" class="tab-screen active">
+            <div class="banner">
+              <h2>Encontre seu parceiro com mais tranquilidade</h2>
+              <p>Cadastre a foto, veja sua localização e monitore a distância com alertas simples.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-title"><span>👤 Meu parceiro</span><span class="pill">CÂMERA</span></div>
+              <div id="avatar" class="avatar">📷</div>
+              <div class="name">Meu parceiro</div>
+              <div class="mini">Adicione uma foto para identificar a pessoa</div>
+              <label for="pic" class="btn btn-secondary btn-full" style="display:block;text-align:center">📸 Tirar ou selecionar foto</label>
+              <input class="sr" id="pic" type="file" accept="image/*" capture="environment">
+            </div>
+
+            <div class="card">
+              <div class="card-title"><span>📍 Minha localização</span><span class="pill">GPS</span></div>
+              <div class="grid2">
+                <div class="stat"><strong id="lat">—</strong><small>Latitude</small></div>
+                <div class="stat"><strong id="lon">—</strong><small>Longitude</small></div>
+              </div>
+              <div class="actions">
+                <button id="gps" class="btn btn-secondary">Usar meu GPS</button>
+                <button id="demo" class="btn btn-primary">Usar demo</button>
+              </div>
+              <div class="helper">No MVP, você pode usar coordenadas reais do aparelho ou coordenadas de demonstração.</div>
+            </div>
+          </section>
+
+          <section id="tab-distance" class="tab-screen">
+            <div class="card">
+              <div class="card-title"><span>📏 Distância do parceiro</span><span class="pill">MONITORAMENTO</span></div>
+              <div class="row">
+                <span style="font-size:12px;font-weight:700">Limite de segurança</span>
+                <span style="font-size:11px;color:var(--muted)">100 metros</span>
+              </div>
+              <div class="distance"><span id="dist">—</span> <small>metros</small></div>
+              <div id="signal" class="signal">✓ Pronto para acompanhar a distância.</div>
+              <div class="fields">
+                <label>Latitude do parceiro<input id="partnerLat" type="number" step="any" placeholder="-16.32636"></label>
+                <label>Longitude do parceiro<input id="partnerLon" type="number" step="any" placeholder="-48.95340"></label>
+              </div>
+              <div class="helper">No MVP, as coordenadas do parceiro são informadas manualmente para facilitar a apresentação.</div>
+              <div class="actions">
+                <button id="near" class="btn btn-secondary">Simular perto</button>
+                <button id="far" class="btn btn-primary">Simular longe</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title"><span>🔔 Notificação local</span><span class="pill">ALERTA</span></div>
+              <p class="caption">A notificação é disparada quando o parceiro ultrapassa o limite de 100 metros.</p>
+              <button id="notify" class="btn btn-secondary btn-full">Testar notificação</button>
+            </div>
+          </section>
+
+          <section id="tab-alerts" class="tab-screen">
+            <div class="card">
+              <div class="card-title"><span>🚨 Parceiro distante</span><span class="pill">VISUALIZAÇÃO</span></div>
+              <div class="notif-preview" style="margin-bottom:12px">
+                <div class="notif-icon">🔔</div>
+                <div>
+                  <strong>EncontreMeuParceiro</strong>
+                  <p>Seu parceiro está a mais de 100 metros de você.</p>
+                </div>
+              </div>
+              <div class="signal danger">⚠️ Alerta ativo: parceiro fora do limite de segurança.</div>
+              <div class="helper">Esta tela foi adicionada para mostrar claramente, na apresentação, como o app exibe o estado de alerta quando o parceiro estiver longe.</div>
+              <div class="actions">
+                <button id="showToast" class="btn btn-primary">Mostrar alerta</button>
+                <button id="resetAlert" class="btn btn-secondary">Limpar alerta</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="tab-sensor" class="tab-screen">
+            <div class="card">
+              <div class="card-title"><span>📐 Acelerômetro</span><span id="sensorKind" class="pill">DEMO</span></div>
+              <div class="grid3">
+                <div class="stat axis"><small>Eixo X</small><strong id="ax">0.00</strong></div>
+                <div class="stat axis"><small>Eixo Y</small><strong id="ay">0.00</strong></div>
+                <div class="stat axis"><small>Eixo Z</small><strong id="az">9.81</strong></div>
+              </div>
+              <button id="sensor" class="btn btn-secondary btn-full" style="margin-top:12px">Ativar sensor do aparelho</button>
+              <div class="helper">Quando o navegador não permite o sensor real, os valores são simulados para fins de demonstração.</div>
+            </div>
+            <div class="footer">EncontreMeuParceiro • Protótipo acadêmico</div>
+          </section>
+        </div>
+
+        <nav class="bottom-nav">
+          <button class="nav-item active" data-tab="home"><span>🏠</span><span>Início</span></button>
+          <button class="nav-item" data-tab="distance"><span>📍</span><span>Distância</span></button>
+          <button class="nav-item" data-tab="alerts"><span>🔔</span><span>Alertas</span></button>
+          <button class="nav-item" data-tab="sensor"><span>📐</span><span>Sensores</span></button>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    let me = null, prevFar = false, demoTimer = null;
+    const $ = id => document.getElementById(id);
+    const R = Math.PI / 180;
+
+    function hav(a, b){
+      let dl = (b.lat - a.lat) * R;
+      let dlon = (b.lon - a.lon) * R;
+      let h = Math.sin(dl/2)**2 + Math.cos(a.lat*R) * Math.cos(b.lat*R) * Math.sin(dlon/2)**2;
+      return 6371000 * 2 * Math.asin(Math.sqrt(h));
+    }
+
+    function showToast(text='Seu parceiro está a mais de 100 metros de você.'){
+      const toast = $('toast');
+      toast.querySelector('p').textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    async function requestNotification(){
+      if('Notification' in window && Notification.permission === 'default') {
+        await Notification.requestPermission();
+      }
+    }
+
+    function notify(){
+      showToast();
+      if('Notification' in window && Notification.permission === 'granted') {
+        new Notification('EncontreMeuParceiro', { body: 'Seu parceiro está a mais de 100 metros de você.' });
+      }
+    }
+
+    function update(){
+      let b = { lat:Number($('partnerLat').value), lon:Number($('partnerLon').value) };
+      if(!me || !$('partnerLat').value || !$('partnerLon').value){
+        $('dist').textContent = '—';
+        return;
+      }
+      let d = hav(me,b), far = d > 100;
+      $('dist').textContent = Math.round(d).toLocaleString('pt-BR');
+      $('signal').textContent = far ? '⚠️ Parceiro fora do limite de segurança!' : '✓ Parceiro dentro do limite de 100 metros.';
+      $('signal').classList.toggle('danger', far);
+      if(far && !prevFar) notify();
+      prevFar = far;
+    }
+
+    function setMe(lat, lon){
+      me = {lat, lon};
+      $('lat').textContent = lat.toFixed(5);
+      $('lon').textContent = lon.toFixed(5);
+      update();
+    }
+
+    $('pic').addEventListener('change', e => {
+      const f = e.target.files[0];
+      if(f){
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(f);
+        img.className = 'avatar';
+        img.id = 'avatar';
+        $('avatar').replaceWith(img);
+      }
+    });
+
+    $('demo').onclick = () => {
+      setMe(-16.32650,-48.95340);
+      $('partnerLat').value = -16.32636;
+      $('partnerLon').value = -48.95340;
+      prevFar = false;
+      update();
+    };
+
+    $('gps').onclick = () => {
+      if(!navigator.geolocation) return showToast('GPS indisponível neste navegador.');
+      navigator.geolocation.getCurrentPosition(
+        p => { setMe(p.coords.latitude, p.coords.longitude); },
+        () => showToast('Não foi possível obter o GPS. Use o modo demo.'),
+        { enableHighAccuracy:true, timeout:12000 }
+      );
+    };
+
+    ['partnerLat','partnerLon'].forEach(id => $(id).addEventListener('input', update));
+
+    function move(meters){
+      if(!me) $('demo').click();
+      prevFar = meters > 100 ? false : prevFar;
+      $('partnerLat').value = (me.lat + meters / 111195).toFixed(7);
+      $('partnerLon').value = me.lon.toFixed(7);
+      update();
+    }
+
+    $('near').onclick = () => move(35);
+    $('far').onclick = () => move(175);
+    $('notify').onclick = async () => { await requestNotification(); notify(); };
+    $('showToast').onclick = async () => { await requestNotification(); notify(); };
+    $('resetAlert').onclick = () => $('toast').classList.remove('show');
+
+    function axis(x,y,z){
+      $('ax').textContent = x.toFixed(2);
+      $('ay').textContent = y.toFixed(2);
+      $('az').textContent = z.toFixed(2);
+    }
+
+    function simulateSensor(){
+      if(demoTimer) return;
+      $('sensorKind').textContent = 'DEMO';
+      demoTimer = setInterval(() => {
+        axis(
+          Math.sin(Date.now()/530) * 1.6,
+          Math.cos(Date.now()/780) * 1.2,
+          9.81 + Math.sin(Date.now()/460) * .6
+        );
+      }, 90);
+    }
+
+    $('sensor').onclick = async () => {
+      if('DeviceMotionEvent' in window){
+        try{
+          if(typeof DeviceMotionEvent.requestPermission === 'function'){
+            let p = await DeviceMotionEvent.requestPermission();
+            if(p !== 'granted') throw Error('sem permissão');
+          }
+          let got = false;
+          window.addEventListener('devicemotion', e => {
+            let v = e.accelerationIncludingGravity;
+            if(v && v.x !== null){
+              got = true;
+              axis(v.x || 0, v.y || 0, v.z || 0);
+              $('sensorKind').textContent = 'REAL';
+            }
+          }, { passive:true });
+          setTimeout(() => { if(!got) simulateSensor(); }, 1500);
+          return;
+        }catch(e){}
+      }
+      simulateSensor();
+    };
+
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-screen').forEach(sec => sec.classList.remove('active'));
+        $('tab-' + tab).classList.add('active');
+      });
+    });
+
+    // initial demo data for presentation
+    $('demo').click();
+    simulateSensor();
+  </script>
+</body>
+</html>

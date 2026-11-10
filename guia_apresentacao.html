@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Completo de Apresentação • EncontreMeuParceiro</title>
+  <style>
+    :root {
+      --primary: #EF8F95;
+      --primary-strong: #E77982;
+      --primary-soft: #FDE7E9;
+      --text: #442E31;
+      --muted: #8E7175;
+      --line: #F1D6D9;
+      --ok: #EAF8EF;
+      --ok-text: #3B7650;
+      --danger: #FFF0F1;
+      --danger-text: #BB4F5D;
+      --card-bg: #FFFFFF;
+      --page-bg: #FFF8F8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--page-bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 36px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(231, 121, 130, 0.1);
+      text-align: center;
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      color: var(--primary-strong);
+      font-size: 32px;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-top: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0 30px;
+    }
+
+    .quick-nav a {
+      background: white;
+      color: var(--text);
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .quick-nav a:hover {
+      background: var(--primary-strong);
+      color: white;
+      border-color: var(--primary-strong);
+      transform: translateY(-2px);
+    }
+
+    section {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    }
+
+    section h2 {
+      font-size: 21px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid var(--primary-soft);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .table-req {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .table-req th, .table-req td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .table-req th {
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      font-weight: 800;
+    }
+
+    .table-req tr:nth-child(even) {
+      background: #FFFDFD;
+    }
+
+    /* Fluxo */
+    .flow-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--page-bg);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px dashed var(--line);
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: white;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+
+    .flow-number {
+      background: var(--primary-strong);
+      color: white;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .flow-desc strong {
+      display: block;
+      color: var(--primary-strong);
+      font-size: 15px;
+    }
+
+    .flow-desc span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: var(--primary-strong);
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    /* Alerta de Destaque */
+    .highlight-banner {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary-strong);
+      padding: 14px 18px;
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .highlight-banner strong {
+      color: var(--primary-strong);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    /* Cards de Classes */
+    .class-card {
+      background: #FAFAFA;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .class-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .class-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-strong);
+    }
+
+    .class-file {
+      font-family: monospace;
+      font-size: 12px;
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .class-role {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .detail-box {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    .detail-box strong {
+      color: var(--primary-strong);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .speech-box {
+      background: var(--ok);
+      border-left: 4px solid var(--ok-text);
+      padding: 12px 16px;
+      border-radius: 0 12px 12px 0;
+      font-size: 13px;
+      color: var(--ok-text);
+    }
+
+    .speech-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    /* Passos de Demonstração */
+    .demo-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      background: #FFFDFD;
+      border: 1px solid var(--line);
+      padding: 16px;
+      border-radius: 14px;
+    }
+
+    .demo-step-icon {
+      font-size: 24px;
+      background: var(--primary-soft);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .demo-step-content strong {
+      display: block;
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .demo-step-content p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* FAQ */
+    .qa-item {
+      background: #FAFAFA;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .qa-question {
+      font-weight: 800;
+      color: var(--primary-strong);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .qa-answer {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="logo-badge">⌖</div>
+    <h1>EncontreMeuParceiro</h1>
+    <p>Guia Completo de Apresentação e Arquitetura do Aplicativo Mobile em Flutter</p>
+    <span class="badge">Código 100% em Português • Fiel ao Protótipo v2</span>
+  </header>
+
+  <div class="quick-nav">
+    <a href="#requisitos">1. Requisitos</a>
+    <a href="#notificacao">2. Alinhamento da Notificação</a>
+    <a href="#fluxo">3. Fluxo da Simulação</a>
+    <a href="#classes">4. Classes do Código</a>
+    <a href="#roteiro">5. Roteiro de Apresentação</a>
+    <a href="#perguntas">6. Perguntas da Banca</a>
+  </div>
+
+  <!-- SEÇÃO 1: REQUISITOS -->
+  <section id="requisitos">
+    <h2>🎯 1. Os 4 Requisitos Integrados ao Protótipo</h2>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
+      O projeto <strong>EncontreMeuParceiro</strong> atende rigorosamente às 4 exigências de hardware de forma contextualizada, prática e interativa:
+    </p>
+
+    <table class="table-req">
+      <thead>
+        <tr>
+          <th>Requisito</th>
+          <th>Aba no Aplicativo</th>
+          <th>Componente Visual</th>
+          <th>Pacote Flutter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Câmera</strong></td>
+          <td>🏠 Início</td>
+          <td>Avatar do Parceiro + Botão <em>"📸 Tirar ou selecionar foto"</em></td>
+          <td><code>image_picker</code></td>
+        </tr>
+        <tr>
+          <td><strong>2. Localização GPS</strong></td>
+          <td>🏠 Início</td>
+          <td>Cards de Latitude e Longitude + Botões <em>"Usar meu GPS"</em> e <em>"Usar demo"</em></td>
+          <td><code>geolocator</code></td>
+        </tr>
+        <tr>
+          <td><strong>3. Notificação Local</strong></td>
+          <td>📍 Distância & 🔔 Alertas</td>
+          <td>Disparada automaticamente no <em>"Simular longe (175m)"</em> ou pelo <em>"Testar notificação"</em></td>
+          <td><code>flutter_local_notifications</code></td>
+        </tr>
+        <tr>
+          <td><strong>4. Acelerômetro</strong></td>
+          <td>📐 Sensores</td>
+          <td>Cards dos Eixos X, Y e Z atualizados a cada milissegundo em m/s²</td>
+          <td><code>sensors_plus</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SEÇÃO 2: NOTIFICAÇÃO NATIVA (ALINHAMENTO) -->
+  <section id="notificacao">
+    <h2>🔔 2. Como Funciona a Notificação Nativa (Heads-up com Som)</h2>
+    
+    <div class="highlight-banner">
+      <strong>✨ Notificação Alinhada no Sistema:</strong>
+      Removemos a notificação interna falsa (toast na tela do Flutter). Agora o app aciona <strong>exclusivamente a Notificação Nativa do Sistema Operacional</strong>, que salta do topo da tela do celular com som, vibração e banner em alta prioridade!
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-box">
+        <strong>Banner Superior Nativo (Heads-up / Popdown):</strong>
+        Configurado com <code>Importance.max</code> e <code>Priority.high</code>. Faz com que a notificação desça lá de cima da tela do Android, visível mesmo com o app aberto ou em segundo plano.
+      </div>
+      <div class="detail-box">
+        <strong>Som & Vibração Nativos:</strong>
+        Habilitamos <code>playSound: true</code> e <code>enableVibration: true</code> com padrão de pulso <code>[0, 500, 250, 500]</code> no canal de notificação oficial.
+      </div>
+      <div class="detail-box">
+        <strong>Design com a Identidade do App:</strong>
+        Usa o ícone padrão, título <em>"🚨 EncontreMeuParceiro"</em>, estilo expandido <code>BigTextStyleInformation</code> e cor temática rosa pastel (<code>#E77982</code>).
+      </div>
+      <div class="detail-box">
+        <strong>Canal Próprio no Android:</strong>
+        Registrado como <code>canal_alertas_prioridade_maxima</code>, garantindo que o Android respeite o alerta mesmo em aparelhos mais recentes (Android 13+).
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: FLUXO DA SIMULAÇÃO -->
+  <section id="fluxo">
+    <h2>🔄 3. Fluxo de Simulação da Distância</h2>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
+      Desenvolvemos uma simulação limpa para demonstrar o funcionamento dos sensores em sala de aula:
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-step">
+        <div class="flow-number">1</div>
+        <div class="flow-desc">
+          <strong>Minha Localização (Ponto A)</strong>
+          <span>Capturada pelo GPS real via <code>geolocator</code> ou pelo botão <code>Usar demo</code> (-16.32650, -48.95340).</span>
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-number">2</div>
+        <div class="flow-desc">
+          <strong>Simular Perto: 35 metros</strong>
+          <span>O parceiro é colocado a 35m. O sinal fica <strong>verde</strong> (<em>"✓ Parceiro dentro do limite de 100 metros"</em>). Estado normal.</span>
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-number">3</div>
+        <div class="flow-desc">
+          <strong>Simular Longe: 175 metros (Ultrapassa 100m)</strong>
+          <span>O sinal muda para <strong>vermelho perigo</strong> e o Android dispara a <strong>Notificação Nativa com Som e Banner Flutuante</strong> no celular!</span>
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-step">
+        <div class="flow-number">4</div>
+        <div class="flow-desc">
+          <strong>Aba Alertas</strong>
+          <span>Recebe o badge de alerta ativo, exibe o preview oficial da notificação e permite testar ou limpar o estado de alerta.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: CADA CLASSE EXPLICADA -->
+  <section id="classes">
+    <h2>📦 4. Cada Classe do Código em Português</h2>
+
+    <!-- TelaNavegacao -->
+    <div class="class-card">
+      <div class="class-header">
+        <div class="class-name">TelaNavegacao</div>
+        <div class="class-file">lib/screens/tela_navegacao.dart</div>
+      </div>
+      <div class="class-role">
+        Gerenciador do estado compartilhado (foto, coordenadas, distância e alerta) e da navegação com BottomNavigationBar flutuante.
+      </div>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <strong>Estado compartilhado:</strong>
+          <code>_fotoParceiro</code>, <code>_minhaLatitude</code>, <code>_minhaLongitude</code>, <code>_distanciaAtual</code> e <code>_alertaAtivo</code>.
+        </div>
+        <div class="detail-box">
+          <strong>Método _dispararAlerta():</strong>
+          Muda <code>_alertaAtivo = true</code> e chama <code>ServicoNotificacao.exibirNotificacao()</code>.
+        </div>
+      </div>
+      <div class="speech-box">
+        <strong>O que falar para o professor:</strong>
+        "A TelaNavegacao centraliza o estado do app. Ela monta o topo oficial com o logotipo e o selo MVP, e a barra inferior flutuante que alterna entre as 4 abas."
+      </div>
+    </div>
+
+    <!-- TelaInicio -->
+    <div class="class-card">
+      <div class="class-header">
+        <div class="class-name">TelaInicio (Câmera & GPS)</div>
+        <div class="class-file">lib/screens/tela_inicio.dart</div>
+      </div>
+      <div class="class-role">
+        Atende a dois requisitos: a captura de foto do parceiro (Câmera) e a consulta da localização do usuário (GPS).
+      </div>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <strong>Método _tirarFoto():</strong>
+          Aciona o <code>ImagePicker.pickImage(source: ImageSource.camera)</code>. Guarda o arquivo em <code>_fotoParceiro</code> e exibe no avatar com <code>Image.file()</code>.
+        </div>
+        <div class="detail-box">
+          <strong>Método _obterGpsReal() & Demo:</strong>
+          Valida permissões via <code>geolocator</code> e busca <code>getCurrentPosition()</code>. Possui o botão 'Usar demo' para segurança na apresentação.
+        </div>
+      </div>
+      <div class="speech-box">
+        <strong>O que falar para o professor:</strong>
+        "Na TelaInicio atendemos os requisitos de Câmera e GPS. A foto preenche o avatar do parceiro dinamicamente e as coordenadas de Latitude e Longitude são obtidas dos satélites em tempo real."
+      </div>
+    </div>
+
+    <!-- TelaDistancia -->
+    <div class="class-card">
+      <div class="class-header">
+        <div class="class-name">TelaDistancia (Distância & Notificação)</div>
+        <div class="class-file">lib/screens/tela_distancia.dart</div>
+      </div>
+      <div class="class-role">
+        Monitora a distância em metros, compara com o limite de 100m e aciona a notificação de segurança.
+      </div>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <strong>Método _moverParceiro():</strong>
+          Simula o deslocamento em metros (35m seguro ou 175m perigo) ajustando as coordenadas geográficas.
+        </div>
+        <div class="detail-box">
+          <strong>Gatilho de Notificação:</strong>
+          Quando a distância ultrapassa 100 metros, chama <code>onDispararAlerta()</code> que emite a notificação nativa com som no aparelho.
+        </div>
+      </div>
+      <div class="speech-box">
+        <strong>O que falar para o professor:</strong>
+        "Na TelaDistancia fazemos o monitoramento. Ao simular 35 metros o parceiro está seguro. Ao simular 175 metros, o limite de 100m é ultrapassado e o celular emite um alerta sonoro e notificação imediatamente."
+      </div>
+    </div>
+
+    <!-- TelaAlertas -->
+    <div class="class-card">
+      <div class="class-header">
+        <div class="class-name">TelaAlertas (Visualização de Alertas)</div>
+        <div class="class-file">lib/screens/tela_alertas.dart</div>
+      </div>
+      <div class="class-role">
+        Exibe o preview estilizado da notificação recebida e permite gerenciar o histórico de alerta.
+      </div>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <strong>Preview da Notificação:</strong>
+          Cartão visual idêntico à notificação enviada para a barra do sistema operacional.
+        </div>
+        <div class="detail-box">
+          <strong>Controle de Alerta:</strong>
+          Botões para testar o envio avulso e para limpar o alerta, retornando o sistema ao modo seguro.
+        </div>
+      </div>
+      <div class="speech-box">
+        <strong>O que falar para o professor:</strong>
+        "A TelaAlertas serve para a banca conferir o preview idêntico da notificação emitida e o status atual do alerta de afastamento."
+      </div>
+    </div>
+
+    <!-- TelaSensores -->
+    <div class="class-card">
+      <div class="class-header">
+        <div class="class-name">TelaSensores (Acelerômetro)</div>
+        <div class="class-file">lib/screens/tela_sensores.dart</div>
+      </div>
+      <div class="class-role">
+        Lê e exibe os eixos X, Y e Z do acelerômetro físico em tempo real através do pacote <code>sensors_plus</code>.
+      </div>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <strong>accelerometerEventStream():</strong>
+          Iniciado no <code>initState()</code>, escuta as oscilações físicas do hardware em m/s².
+        </div>
+        <div class="detail-box">
+          <strong>dispose() (Obrigatório):</strong>
+          Cancela o <code>_inscricaoSensor?.cancel()</code> ao sair da tela para evitar vazamentos de memória e poupar a bateria.
+        </div>
+      </div>
+      <div class="speech-box">
+        <strong>O que falar para o professor:</strong>
+        "Na TelaSensores demonstramos o acelerômetro real. Conforme movimentamos ou inclinamos o celular, os eixos X, Y e Z oscilam ao vivo. O Stream é cancelado no dispose() para boas práticas de ciclo de vida."
+      </div>
+    </div>
+
+    <!-- ServicoNotificacao -->
+    <div class="class-card">
+      <div class="class-header">
+        <div class="class-name">ServicoNotificacao</div>
+        <div class="class-file">lib/services/servico_notificacao.dart</div>
+      </div>
+      <div class="class-role">
+        Gerencia o canal Android de alta prioridade e o disparo de notificações com som e vibração.
+      </div>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <strong>inicializar():</strong>
+          Cria o canal <code>canal_alertas_prioridade_maxima</code> com importância máxima e pede permissão no Android 13+.
+        </div>
+        <div class="detail-box">
+          <strong>exibirNotificacao():</strong>
+          Dispara o alerta nativo com banner Heads-up, som do sistema e vibração personalizada.
+        </div>
+      </div>
+      <div class="speech-box">
+        <strong>O que falar para o professor:</strong>
+        "Centralizamos toda a lógica nativa no ServicoNotificacao. Ele garante que a notificação tenha prioridade máxima, desça no topo do Android e toque o som padrão do sistema."
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: ROTEIRO PRONTO DE APRESENTAÇÃO -->
+  <section id="roteiro">
+    <h2>🎤 5. Roteiro Passo a Passo para Apresentar ao Vivo (3 Minutos)</h2>
+    
+    <div class="demo-step">
+      <div class="demo-step-icon">📱</div>
+      <div class="demo-step-content">
+        <strong>Passo 1: Abertura (20s)</strong>
+        <p>"Bom dia/boa noite professor(a). Nosso projeto é o <strong>EncontreMeuParceiro</strong>, desenvolvido em Flutter para acompanhamento e segurança do parceiro, atendendo com rigor aos quatro requisitos de hardware: Câmera, GPS, Notificação e Acelerômetro."</p>
+      </div>
+    </div>
+
+    <div class="demo-step">
+      <div class="demo-step-icon">📷</div>
+      <div class="demo-step-content">
+        <strong>Passo 2: Demonstrar a Câmera (30s)</strong>
+        <p>"Na aba Início, temos o cartão do parceiro. Clicamos em <em>'📸 Tirar ou selecionar foto'</em>. A câmera nativa abre pelo <code>image_picker</code>. Tiramos a foto e o avatar é atualizado instantaneamente na tela."</p>
+      </div>
+    </div>
+
+    <div class="demo-step">
+      <div class="demo-step-icon">📍</div>
+      <div class="demo-step-content">
+        <strong>Passo 3: Demonstrar o GPS (30s)</strong>
+        <p>"Logo abaixo, temos o GPS. Clicamos em <em>'Usar meu GPS'</em>. O app valida a permissão e busca as coordenadas reais de Latitude e Longitude via satélite usando o <code>geolocator</code>. Também incluímos o botão <em>'Usar demo'</em> para salas fechadas."</p>
+      </div>
+    </div>
+
+    <div class="demo-step">
+      <div class="demo-step-icon">🔔</div>
+      <div class="demo-step-content">
+        <strong>Passo 4: Demonstrar a Distância e a Notificação (40s)</strong>
+        <p>"Na aba Distância, temos o limite seguro de 100 metros. Clicamos em <em>'Simular perto (35m)'</em> e o sinal fica verde seguro. Agora clicamos em <em>'Simular longe (175m)'</em>: como superou 100m, o sinal fica vermelho e <strong>a notificação nativa do Android salta no topo da tela com som e vibração</strong> avisando que o parceiro se afastou!"</p>
+      </div>
+    </div>
+
+    <div class="demo-step">
+      <div class="demo-step-icon">📐</div>
+      <div class="demo-step-content">
+        <strong>Passo 5: Demonstrar o Acelerômetro (30s)</strong>
+        <p>"Por fim, na aba Sensores, movimentamos o aparelho na mão: os eixos X, Y e Z oscilam em tempo real via <code>sensors_plus</code>. Demonstramos o botão de pausar e explicamos que o Stream é cancelado no <code>dispose()</code> para não drenar a bateria."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: PERGUNTAS DO PROFESSOR -->
+  <section id="perguntas">
+    <h2>💡 6. Perguntas Frequentes da Banca e Respostas na Ponta da Língua</h2>
+
+    <div class="qa-item">
+      <div class="qa-question">1. Por que a notificação salta no topo da tela e toca som?</div>
+      <div class="qa-answer">
+        <strong>Resposta:</strong> "Porque configuramos o canal de notificação no Android com <code>Importance.max</code> e <code>Priority.high</code>. No Android, isso habilita as notificações do tipo <em>Heads-up</em> (banner flutuante) com som e vibração habilitados pelo sistema operacional."
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question">2. Por que o dispose() no acelerômetro é obrigatório?</div>
+      <div class="qa-answer">
+        <strong>Resposta:</strong> "Porque o sensor usa um <code>StreamSubscription</code> contínuo conectado ao hardware do celular. Se não cancelarmos a escuta no <code>dispose()</code>, ela continua rodando em segundo plano, causando vazamento de memória (memory leak) e descarregando a bateria do usuário."
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question">3. Onde estão declaradas as permissões do aplicativo?</div>
+      <div class="qa-answer">
+        <strong>Resposta:</strong> "No arquivo <code>android/app/src/main/AndroidManifest.xml</code>: <code>CAMERA</code> para fotografar, <code>ACCESS_FINE_LOCATION</code> para o GPS de alta precisão, <code>POST_NOTIFICATIONS</code> para notificações no Android 13+ e <code>VIBRATE</code> para o alerta vibratório."
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question">4. O que significa o valor ~9.81 m/s² no eixo Z quando o celular está sobre a mesa?</div>
+      <div class="qa-answer">
+        <strong>Resposta:</strong> "É a aceleração da gravidade terrestre ($g \approx 9.8 m/s^2$). Como o aparelho está deitado reto sobre a mesa, a gravidade atua perpendicularmente à tela no eixo Z."
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    EncontreMeuParceiro • Trabalho Acadêmico Mobile • Flutter & Dart
+  </footer>
+
+</div>
+
+</body>
+</html>
